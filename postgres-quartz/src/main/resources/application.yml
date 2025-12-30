@@ -1,0 +1,26 @@
+spring:
+  profiles:
+    active: local
+  quartz:
+    job-store-type: jdbc
+    jdbc:
+      initial-schema: never
+    properties:
+        org:
+          quartz:
+              scheduler:
+                  instanceName: TestScheduler
+                  instanceId: AUTO
+              jobStore:
+                  class: org.springframework.scheduling.quartz.LocalDataSourceJobStore
+                  driverDelegateClass: org.quartz.impl.jdbcjobstore.PostgreSQLDelegate
+                  tablePrefix: QRTZ_
+                  isClustered: true
+                  clusterCheckinInterval: 10000
+                  useProperties: false
+                  acquireTriggersWithinLock: true
+              threadPool:
+                  class: org.quartz.simpl.SimpleThreadPool
+                  threadCount: 5
+                  threadPriority: 5
+                  threadsInheritContextClassLoaderOfInitializingThread: true
